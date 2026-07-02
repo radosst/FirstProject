@@ -9,6 +9,8 @@ namespace FirstProject
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.InputEncoding = System.Text.Encoding.UTF8;
+
             List<Person> people = LoadPeopleFromFile();
             bool running = true;
 
@@ -46,10 +48,10 @@ namespace FirstProject
                         break;
 
                     case "2":
-                        Console.WriteLine("--- ---");
+                        Console.WriteLine("---Списък с хора---");
                         if(people.Count==0)
                         {
-                            Console.WriteLine("");
+                            Console.WriteLine("Списъкът е празен (няма записи във файла)");
                         }
                         else
                         {
@@ -59,6 +61,34 @@ namespace FirstProject
                             }
                         }
                         Console.WriteLine();
+                        break;
+
+                    case "3":
+                        Console.Write("");
+                        string nameToUpdate= Console.ReadLine();
+
+                        Person personToUpdate = null;
+
+                        foreach (Person p in people)
+                        {
+                            if (p.Name.Equals(nameToUpdate, StringComparison.OrdinalIgnoreCase))
+                            {
+                                personToUpdate = p;
+                                break;
+                            }
+                        }
+                        if(personToUpdate != null)
+                        {
+                            Console.Write($"Сегашната заплата на {personToUpdate.Name}:{personToUpdate.Salary:F2} .Нова заплата");
+                            double newSalary=double.Parse(Console.ReadLine());
+                            personToUpdate.Salary = newSalary;
+                            SavePeopleToFile(people);
+                            Console.WriteLine($"Заплатата беше успешно обновена във файла!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Човек с такова име не беше намерен");
+                        }
                         break;
                 }
             }
