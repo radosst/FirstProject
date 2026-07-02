@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
+
 namespace FirstProject
 {
     internal class Program
@@ -7,6 +8,7 @@ namespace FirstProject
         private const string FilePath = "people.txt";
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             List<Person> people = LoadPeopleFromFile();
             bool running = true;
 
@@ -18,7 +20,7 @@ namespace FirstProject
                 Console.WriteLine("3.UPDATE (Промяна на заплатата)");
                 Console.WriteLine("4.DELETE (Изтриване по име) ");
                 Console.WriteLine("5.Изход");
-                Console.WriteLine("Избор: ");
+                Console.Write("Избор: ");
 
                 string choice= Console.ReadLine();
                 Console.WriteLine();
@@ -44,6 +46,15 @@ namespace FirstProject
                 people.Add(person);
             }
             return people;
+        }
+        static void SavePeopleToFile(List<Person> people)
+        {
+            List<string>rows=new List<string>();
+            foreach (Person p in people)
+            {
+                rows.Add(p.ToFileRow());
+            }
+            File.WriteAllLines(FilePath, rows);
         }
     }
 }
