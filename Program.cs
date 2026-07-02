@@ -90,6 +90,8 @@ namespace FirstProject
                             Console.WriteLine("Човек с такова име не беше намерен");
                         }
                         break;
+                    case "4":
+                        break;
                 }
             }
         }
