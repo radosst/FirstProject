@@ -25,5 +25,17 @@ namespace FirstProject
         {
             return $"{Name};{Age};{Salary}";
         }
+        public static Person FromFileRow (string row)
+        {
+            string[] parts = row.Split(';');
+            if (parts.Length == 3)
+            {
+                string name = parts[0];
+                int age = int.Parse(parts[1]);
+                double salary = double.Parse(parts[2]);
+                return new Person(name, age, salary);
+            }
+            return null;
+        }
     }
 }
